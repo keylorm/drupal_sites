@@ -1,0 +1,12 @@
+<?php
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function form_example_cancelar() {
+    $messenger = \Drupal::messenger();
+    $messenger->addMessage(t('Acción Cancelada'), $messenger::TYPE_ERROR);
+    global $base_url;
+    $response = new RedirectResponse($base_url, 302);
+    $response->send();
+    return;
+}

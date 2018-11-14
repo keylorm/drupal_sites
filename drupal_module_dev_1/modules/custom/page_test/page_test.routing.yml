@@ -1,0 +1,77 @@
+page_test.hello_world:
+  path: '/page_test/hello_world'
+  defaults:
+    _title: 'Hello world'
+    _controller: '\Drupal\page_test\Controller\HelloController::hello_world'
+  requirements:
+    _permission: 'access content'
+
+page_test.pagina:
+  path: '/page_test/pagina'
+  defaults:
+    _title: 'Nueva pagina'
+    _controller: '\Drupal\page_test\Controller\HelloController::pagina'
+  requirements:
+    _permission: 'access content'
+
+
+page_test.pagina1:
+  path: '/page_test/pagina1'
+  defaults:
+    _title: 'Nueva pagina 1'
+    _controller: '\Drupal\page_test\Controller\HelloController::pagina1'
+  requirements:
+    _permission: 'access content'
+
+
+page_test.paginadesdeotrocontrolador:
+  path: '/page_test/paginadesdeotrocontrolador'
+  defaults:
+    _title: 'Pagina desde otro controlador'
+    _controller: '\Drupal\page_test\Controller\pagina::paginadesdeotrocontrolador'
+  requirements:
+    _permission: 'access content'
+
+
+
+page_test.pagina_id:
+  path: '/page_test/pagina/{idpagina}'
+  defaults:
+    _title: 'Pagina con parametros'
+    _controller: '\Drupal\page_test\Controller\pagina::verpagina'
+  requirements:
+    _permission: 'access content'
+
+page_test.custom_arg:
+  path: '/page_test/pagina_custom'
+  defaults:
+    _title: 'Pagina con parametros custom'
+    _controller: '\Drupal\page_test\Controller\pagina::verpaginacustom'
+    custom_arg: parametrocustom
+  requirements:
+    _permission: 'access content'
+
+page_test.varias:
+  path: '/page_test/varias'
+  defaults:
+    _title: 'Pagina con varia informacion'
+    _controller: '\Drupal\page_test\Controller\pagina::varias'
+  requirements:
+    _permission: 'access content'
+
+
+page_test.form:
+  path: '/page_test/form'
+  defaults:
+    _title: 'Pagina con form'
+    _controller: '\Drupal\page_test\Controller\pagina::form'
+  requirements:
+    _permission: 'access content'
+
+page_test.template:
+  path: '/page_test/template'
+  defaults:
+    _controller: '\Drupal\page_test\Controller\pagina::template'
+    _title: 'Pagina con template'
+  requirements:
+    _permission: 'access content'

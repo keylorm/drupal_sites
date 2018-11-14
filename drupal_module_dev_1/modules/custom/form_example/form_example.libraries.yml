@@ -1,0 +1,9 @@
+form-example-libraries:
+  version: 1.x
+  css:
+    theme:
+      css/form-example.css: {}
+  js:
+    js/form-example.js: {}
+  dependencies:
+    - core/jquery

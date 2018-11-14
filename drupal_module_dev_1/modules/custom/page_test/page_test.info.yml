@@ -1,0 +1,6 @@
+name: Page test
+description: Crearemos diferentes paginas de ejemplo
+package: Keylor
+
+type: module
+core: 8.x

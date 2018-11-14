@@ -1,0 +1,97 @@
+<?php 
+
+function alterar_formulario_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  /* $form['field_celular']['widget']['0']['value']['#placeholder'] = "Digite su celular";
+    $form['field_celular']['widget']['0']['value']['#attributes']['class'][] = "nueva-clase";
+    $form['field_celular']['widget']['0']['value']['#description'] = "Favor agregar este campo";
+    $form['field_celular']['widget']['0']['value']['#required'] = true;
+    */
+
+    if ($form_id == 'node_article_edit_form'){
+
+        // se crea el contenedor de tipo fieldset
+        $form['fieldset_datos_personales'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Datos personales'),
+        );
+
+        $form['fieldset_datos_personales']['title'] = $form['title'];
+        $form['fieldset_datos_personales']['body'] = $form['body'];
+
+        hide($form['title']);
+        hide($form['body']);
+
+
+        $form['vendedor'] = array(
+            '#type' => 'details',
+            '#title' => t('Vendedor'),
+            '#open' => true,
+
+        );
+
+        $form['vendedor']['field_nombre_y_apellido_anuncian'] = $form['field_nombre_y_apellido_anuncian'];
+        $form['vendedor']['field_correo_anunciante'] = $form['field_correo_anunciante'];
+        $form['vendedor']['field_celular'] = $form['field_celular'];
+
+        hide($form['field_nombre_y_apellido_anuncian']);
+        hide($form['field_correo_anunciante']);
+        hide($form['field_celular']);
+
+
+
+        $form['information'] = array(
+            '#type' => 'vertical_tabs',
+            '#default?tab' => 'edit-publication',
+            '#title' => t('Información'),
+        );
+
+        $form['details_grupo1'] = array(
+            '#type' => 'details',
+            '#title' => t('Grupo de detalle 1'),
+            '#open' => true,
+            '#group' => 'information',
+
+        );
+
+        $form['details_grupo1']['field_tags'] = $form['field_tags'];
+        $form['details_grupo1']['field_image'] = $form['field_image'];
+        
+        hide($form['field_tags']);
+        hide($form['field_image']);
+        
+
+        $form['details_grupo2'] = array(
+            '#type' => 'details',
+            '#title' => t('Grupo de detalle 2'),
+            '#open' => true,
+            '#group' => 'information',
+
+        );
+
+        $form['details_grupo2']['field_paquetes'] = $form['field_paquetes'];
+        $form['details_grupo2']['field_precio'] = $form['field_precio'];
+        
+        hide($form['field_paquetes']);
+        hide($form['field_precio']);
+
+
+        $form['actions']['submit_cancelar'] = array(
+            '#type' => 'submit',
+            '#value' => t('Cancel'),
+            '#submit' => array('cancelar_ok'),
+            '#weight' => 13,
+        );
+    }
+
+
+}
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
+function cancelar_ok() {
+    $messenger = \Drupal::messenger();
+    $messenger->addMessage('Cambios cancelados', $messenger::TYPE_ERROR);
+    $response = new RedirectResponse(\Drupal::url('<front>'), 302);
+    $response->send();
+}
